@@ -33,7 +33,9 @@ export class LoginPageComponent {
   authenticate(){
     const { email, password } = this.form.value;
     this.authenticateService.authenticate(email, password).subscribe(result => {
-      const { refreshToken, accessToken } = result;
+      const { refreshToken, accessToken, user } = result;
+
+      localStorage.setItem('user', JSON.stringify(user));
       this.tokenService.storeAccessToken(accessToken);
       this.tokenService.storeRefreshToken(refreshToken);
     });
