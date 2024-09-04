@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthenticateModel, RefreshToken } from '../../../classes';
-import { Cookie } from '../../helpers/cookie';
+import { AuthenticateModel } from '../../../classes';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +18,12 @@ export class AuthenticateService {
   }
 
   authenticate(email: string, password: string): Observable<AuthenticateModel> {
-    return this.http.post<AuthenticateModel>(`${this.url}/user/auth`, {
+    return this.http.post<AuthenticateModel>(`${this.url}/authenticate`, {
       email, password
-    });
+    },
+    {
+      withCredentials: true
+    }
+  );
   }
 }

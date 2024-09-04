@@ -1,24 +1,39 @@
 import { Injectable } from '@angular/core';
-import { RefreshToken } from '../../../classes';
-import { Cookie } from '../../helpers/cookie';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  constructor(private cookieService: Cookie) { }
+  baseUrl = 'http://localhost:3000/authenticate/refresh-token';
 
-  storeRefreshToken(refreshToken: RefreshToken): void {
-    this.cookieService.create('refreshToken', refreshToken.id, {
-      expires: refreshToken.expiresIn,
-      httpOnly: true,
-      secure: true
-    });
-  }
+  constructor(private httpService: HttpClient) { }
 
   storeAccessToken(accessToken: string): void {
-    localStorage.setItem('user', JSON.stringify({
-      accessToken
-    }))
+    localStorage.setItem('token', accessToken)
+  }
+
+  getAccessToken(): string {
+    const accessToken = localStorage.getItem('token');
+    if(!accessToken){
+      throw new Error('Local access token not found');
+    }
+
+    return accessToken;
+  }
+
+  renewAccessToken(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    return this.httpService.post<any>(this.baseUrl, 
+      {},
+      {
+        headers,
+        withCredentials: true
+      }
+    );
   }
 }

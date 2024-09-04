@@ -6,8 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { AuthenticateService } from '../../providers/services';
-import { TokenService } from '../../providers/services/token/token.service';
+import { AuthenticateService, TokenService } from '../../providers/services';
 
 @Component({
   selector: 'app-login-page',
@@ -33,11 +32,16 @@ export class LoginPageComponent {
   authenticate(){
     const { email, password } = this.form.value;
     this.authenticateService.authenticate(email, password).subscribe(result => {
-      const { refreshToken, accessToken, user } = result;
+      const { accessToken, user } = result;
 
       localStorage.setItem('user', JSON.stringify(user));
       this.tokenService.storeAccessToken(accessToken);
-      this.tokenService.storeRefreshToken(refreshToken);
     });
+  }
+
+  teste(): void {
+    this.tokenService.renewAccessToken().subscribe(res => {
+      console.log('sub', res)
+    })
   }
 }
