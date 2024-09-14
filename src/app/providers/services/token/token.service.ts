@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,11 @@ export class TokenService {
       'Content-Type': 'application/json',
     });
 
-    return this.httpService.post<any>(this.baseUrl, 
-      {},
-      {
+    return this.httpService.post<any>(this.baseUrl, {}, {
         headers,
         withCredentials: true
-      }
-    );
+      }).pipe(
+        tap(response => this.storeAccessToken(response.accessToken))
+      );
   }
 }

@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { accessTokenInterceptor } from './providers/interceptors';
+import { accessTokenInterceptor, refreshTokenInterceptor } from './providers/interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +13,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(
       withInterceptors([
-        accessTokenInterceptor
+        accessTokenInterceptor,
+        refreshTokenInterceptor
       ])
     )
   ]
