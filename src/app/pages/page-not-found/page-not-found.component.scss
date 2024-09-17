@@ -1,0 +1,23 @@
+main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.not-found {
+    &__image {
+        padding-top: 50px;
+        img{
+            width: 350px;
+        }
+    }
+
+    &__text {
+        text-align: center;
+    }
+
+    &__home-link{
+        text-align: center;
+    }
+}
