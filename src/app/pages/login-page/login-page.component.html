@@ -8,11 +8,16 @@
             <mat-label>Senha: </mat-label>
             <input formControlName="password" matInput type="password">
         </mat-form-field>
-        <button (click)="authenticate()" [disabled]="form.invalid" class="form__login-button" mat-fab>
-            <mat-icon>login</mat-icon>
-            Login
-        </button>
+        <ng-container *ngIf="!isLoading; else loadingButtonTemplate">
+            <button (click)="authenticate()" [disabled]="form.invalid" class="form__login-button" mat-fab>
+                <mat-icon>login</mat-icon>
+                Login
+            </button>
+        </ng-container>
+        <ng-template #loadingButtonTemplate>
+            <button disabled="true" class="form__login-button" mat-fab>
+                <mat-spinner diameter="20"></mat-spinner>
+            </button>
+        </ng-template>
     </form>
 </main>
-
-<button (click)="teste()">Teste renew access token</button>

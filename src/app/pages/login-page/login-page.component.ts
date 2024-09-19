@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthenticateService, TokenService } from '../../providers/services';
+import { Router } from '@angular/router';
+import { finalize, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -15,14 +17,18 @@ import { AuthenticateService, TokenService } from '../../providers/services';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnDestroy {
   form: FormGroup;
-  
+  isLoading: boolean;
+  onDestroy$: Subject<void>;
+
   constructor(
     private formBuilder: FormBuilder,
     private authenticateService: AuthenticateService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router
   ){
+    this.onDestroy$ = new Subject();
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -31,17 +37,24 @@ export class LoginPageComponent {
 
   authenticate(){
     const { email, password } = this.form.value;
-    this.authenticateService.authenticate(email, password).subscribe(result => {
+
+    this.isLoading = true;
+    this.authenticateService.authenticate(email, password)
+    .pipe(
+      finalize(() => this.isLoading = false),
+      takeUntil(this.onDestroy$)
+    )
+    .subscribe(result => {
       const { accessToken, user } = result;
 
       localStorage.setItem('user', JSON.stringify(user));
       this.tokenService.storeAccessToken(accessToken);
+      this.router.navigate(['']);
     });
   }
 
-  teste(): void {
-    this.tokenService.renewAccessToken().subscribe(res => {
-      console.log('sub', res)
-    })
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

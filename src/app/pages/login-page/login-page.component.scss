@@ -1,3 +1,7 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme();
+
 main {
     display: flex;
     flex-direction: column;
@@ -11,14 +15,14 @@ main {
     flex-direction: column;
     align-items: center;
 
-    .form__email, .form__password{
+    &__email, &__password{
         width: 100%;
         input {
             padding: 0px 10px;
         }
     }
 
-    .form__login-button{
+    &__login-button{
         width: 200px;
     }
     

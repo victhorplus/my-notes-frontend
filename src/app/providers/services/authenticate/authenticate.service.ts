@@ -18,12 +18,14 @@ export class AuthenticateService {
   }
 
   authenticate(email: string, password: string): Observable<AuthenticateModel> {
-    return this.http.post<AuthenticateModel>(`${this.url}/authenticate`, {
-      email, password
-    },
-    {
-      withCredentials: true
-    }
-  );
+    return this.http.post<AuthenticateModel>(`${this.url}/authenticate`,
+      { email, password },
+      { withCredentials: true }
+    );
+  }
+
+  isLogged(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 }

@@ -14,11 +14,8 @@ export class TokenService {
     localStorage.setItem('token', accessToken)
   }
 
-  getAccessToken(): string {
+  getAccessToken(): string | null {
     const accessToken = localStorage.getItem('token');
-    if(!accessToken){
-      throw new Error('Local access token not found');
-    }
 
     return accessToken;
   }

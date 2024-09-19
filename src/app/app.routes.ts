@@ -1,14 +1,21 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './pages';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { authenticateGuard, loginGuard } from './providers/guards';
 
 export const routes: Routes = [
     {
+        path: '',
+        loadComponent: () => import('./pages/home-page/home-page.component').then(m => m.HomePageComponent),
+        canActivate: [authenticateGuard]
+    },
+    {
         path: 'login',
-        component: LoginPageComponent
+        loadComponent: () => import('./pages/login-page/login-page.component').then(m => m.LoginPageComponent),
+        canActivate: [loginGuard]
     },
     {
         path: '**',
-        component: PageNotFoundComponent
+        loadComponent: () => import('./pages/page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent),
+        canActivate: [authenticateGuard]
     }
 ];
+
