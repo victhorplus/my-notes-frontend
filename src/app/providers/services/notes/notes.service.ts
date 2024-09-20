@@ -12,8 +12,9 @@ export class NotesService {
   constructor(private httpService: HttpClient) { }
 
   getNotes(): Observable<Notes[]> {
-    return this.httpService.get(this.baseUrl).pipe(
-      map((response: any) => response.data)
+    return this.httpService.get<{ data: Notes[] }>(this.baseUrl)
+    .pipe(
+      map((response) => response.data)
     );
   }
 }
