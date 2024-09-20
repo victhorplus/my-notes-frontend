@@ -9,7 +9,7 @@ export function accessTokenInterceptor(req: HttpRequest<unknown>, next: HttpHand
   if(!accessToken){ return next(req); }
   
   const newReq = req.clone({
-    headers: req.headers.append('Authorization', accessToken),
+    headers: req.headers.append('authorization', `Bearer ${accessToken}`),
   });
   
   return next(newReq);
