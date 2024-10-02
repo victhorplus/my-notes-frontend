@@ -1,0 +1,4 @@
+<ng-container *ngIf="timer$ | async as timer">
+    <div> Access token: </div> <br>
+    <div> {{ timer.minutes }}:{{ timer.seconds }} </div>
+</ng-container>
