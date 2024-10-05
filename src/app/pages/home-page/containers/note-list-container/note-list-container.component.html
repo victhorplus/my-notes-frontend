@@ -1,0 +1,16 @@
+<div class="note">
+    <button class="note__close-button" mat-icon-button aria-label="Adicionar anotação">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+<div *ngIf="$notes | async as notes; else loadNotesTemplate">
+    <ng-container *ngFor="let note of notes">
+        <app-note-item [note]="note"></app-note-item>
+    </ng-container>
+</div>
+
+<ng-template #loadNotesTemplate>
+    <mat-spinner></mat-spinner>
+</ng-template>
+
+<button (click)="getData()">Get lista</button>

@@ -34,7 +34,7 @@ export class AccesTokenTimerComponent {
     minutes: string;
     seconds: string;
   }> {
-    return interval(1000).pipe(
+    return interval(500).pipe(
       map(() => {
         const timeToExpire = new Date(this.getExpiration()*1000).getTime() - new Date().getTime();
         const seconds = Math.floor(timeToExpire / 1000);

@@ -1,0 +1,27 @@
+// @use '@angular/material' as mat;
+// $theme: mat.define-theme();
+
+.note {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    max-width: 300px;
+
+    &__title {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    &__preview-text {
+        font-size: 17px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+  }
+  
+  
+  
