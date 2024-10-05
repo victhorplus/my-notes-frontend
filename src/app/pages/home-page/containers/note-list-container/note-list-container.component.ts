@@ -25,4 +25,12 @@ export class NoteListContainerComponent {
   getData(): void {
     this.$notes = this.notesService.getNotes();
   }
+
+  onSelectNote(note: Notes): void {
+    console.log("Anotação selecionada: ", note)
+  }
+
+  onDeleteNote(note: Notes): void {
+    console.log("Anotação deletada: ", note)
+  }
 }
