@@ -20,7 +20,7 @@ export class TokenService {
     return accessToken;
   }
 
-  renewAccessToken(): Observable<any> {
+  renewAccessToken(): Observable<{accessToken: string;}> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });

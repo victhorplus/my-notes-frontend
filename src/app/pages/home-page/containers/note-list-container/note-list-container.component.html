@@ -1,14 +1,16 @@
-<div class="add-note list-item">
-    <mat-icon>add</mat-icon>
-</div>
-<div *ngIf="$notes | async as notes; else loadNotesTemplate">
-    <div class="list-item" *ngFor="let note of notes">
-        <app-note-item [note]="note" (select)="onSelectNote($event)" (delete)="onDeleteNote($event)"></app-note-item>
+<div class="list">
+    <div class="list__item add-note">
+        <mat-icon>add</mat-icon>
     </div>
+    <div *ngIf="$notes | async as notes; else loadNotesTemplate">
+        <div class="list__item" *ngFor="let note of notes">
+            <app-note-item [note]="note" (select)="onSelectNote($event)" (delete)="onDeleteNote($event)"></app-note-item>
+        </div>
+    </div>
+    
+    <ng-template #loadNotesTemplate>
+        <mat-spinner></mat-spinner>
+    </ng-template>
 </div>
-
-<ng-template #loadNotesTemplate>
-    <mat-spinner></mat-spinner>
-</ng-template>
 
 <button (click)="getData()">Get lista</button>

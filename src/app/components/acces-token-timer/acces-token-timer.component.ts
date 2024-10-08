@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { TokenService } from '../../providers/services';
 import { CommonModule } from '@angular/common';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { interval, map, Observable, timeInterval } from 'rxjs';
+import { interval, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-acces-token-timer',
@@ -57,8 +56,8 @@ export class AccesTokenTimerComponent {
 
   getExpiration(): number {
     if(!this.tokenService.getAccessToken()) return 0;
+    
     this.token = this.tokenService.getAccessToken() as string;
-    console.log(this.token);
     let [ header, payload ] = this.token?.split('.');
     return JSON.parse(atob(payload))?.exp;
   }
