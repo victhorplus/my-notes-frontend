@@ -1,4 +1,11 @@
 <div class="list">
+    <div class="list__search-field">
+        <mat-form-field appearance="outline">
+            <mat-label>Buscar anotação</mat-label>
+            <mat-icon matSuffix (click)="search(searchInput.value)">search</mat-icon>
+            <input #searchInput matInput (keyup.enter)="search(searchInput.value)">
+        </mat-form-field>
+    </div>
     <div class="list__item add-note" (click)="addNote()">
         <mat-icon>add</mat-icon>
     </div>
