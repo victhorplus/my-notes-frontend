@@ -16,18 +16,22 @@ import { NotesService } from '../../../../providers/services';
   styleUrl: './note-list-container.component.scss'
 })
 export class NoteListContainerComponent {
-  $notes: Observable<Notes[]>;
+  notes$: Observable<Notes[]>;
   
   constructor(private notesService: NotesService){
     this.getData();
   }
 
   getData(): void {
-    this.$notes = this.notesService.getNotes();
+    this.notes$ = this.notesService.getNotes();
   }
 
   onSelectNote(note: Notes): void {
     console.log("Anotação selecionada: ", note)
+  }
+
+  addNote(): void {
+    console.log("Adicionar anotação")
   }
 
   onDeleteNote(note: Notes): void {

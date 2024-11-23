@@ -3,9 +3,9 @@
     display: grid;
     grid-template-columns: 1fr auto;
     border: 1px solid #ccc;
-    width: 100%;
     max-width: 300px;
     cursor: pointer;
+    padding: 5px 10px;
 
     &__title {
         display: flex;
