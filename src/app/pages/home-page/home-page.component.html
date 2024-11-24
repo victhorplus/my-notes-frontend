@@ -3,6 +3,13 @@
         [notes]="notes$ | async"
         [isLoading]="isLoading"
         (search)="getData($event)"
+        (select)="onSelectNote($event)"
+        (add)="onAddNote()"
+        (delete)="onDeleteNote($event)"
     ></app-note-list-container>
+</section>
+
+<section class="note">
+    <app-note-container></app-note-container>
 </section>
 <!-- <app-acces-token-timer></app-acces-token-timer> -->
