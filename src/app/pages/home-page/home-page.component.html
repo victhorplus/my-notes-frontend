@@ -1,4 +1,8 @@
 <section class="note-list">
-    <app-note-list-container></app-note-list-container>
+    <app-note-list-container
+        [notes]="notes$ | async"
+        [isLoading]="isLoading"
+        (search)="getData($event)"
+    ></app-note-list-container>
 </section>
 <!-- <app-acces-token-timer></app-acces-token-timer> -->

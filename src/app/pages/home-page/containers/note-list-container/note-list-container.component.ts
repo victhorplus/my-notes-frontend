@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NoteItemComponent } from '../../components';
-import { INotesParams, Notes } from '../../../../classes';
-import { NotesService } from '../../../../providers/services';
+import { INoteParams, Note } from '../../../../classes';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,29 +17,33 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './note-list-container.component.scss'
 })
 export class NoteListContainerComponent {
-  notes$: Observable<Notes[]>;
+  @Output() search: EventEmitter<INoteParams>;
+  @Output() select: EventEmitter<Note>;
+  @Output() add: EventEmitter<void>;
+  @Output() delete: EventEmitter<Note>;
+  @Input() notes: Note[];
+  @Input() isLoading: boolean;
   
-  constructor(private notesService: NotesService){
-    this.getData();
+  constructor(){
+    this.search = new EventEmitter();
+    this.select = new EventEmitter();
+    this.add = new EventEmitter();
+    this.delete = new EventEmitter();
   }
 
-  getData(params?: INotesParams): void {
-    this.notes$ = this.notesService.getNotes(params);
+  onSelectNote(note: Note): void {
+    this.select.emit(note);
   }
 
-  onSelectNote(note: Notes): void {
-    console.log("Anotação selecionada: ", note)
+  onAddNote(): void {
+    this.add.emit();
   }
 
-  addNote(): void {
-    console.log("Adicionar anotação")
+  onDeleteNote(note: Note): void {
+    this.delete.emit(note);
   }
 
-  onDeleteNote(note: Notes): void {
-    console.log("Anotação deletada: ", note)
-  }
-
-  search(title: string): void {
-    this.getData({title});
+  onSearch(params?: INoteParams): void {
+    this.search.emit(params);
   }
 }

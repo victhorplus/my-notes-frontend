@@ -2,14 +2,14 @@
     <div class="list__search-field">
         <mat-form-field appearance="outline">
             <mat-label>Buscar anotação</mat-label>
-            <mat-icon matSuffix (click)="search(searchInput.value)">search</mat-icon>
-            <input #searchInput matInput (keyup.enter)="search(searchInput.value)">
+            <mat-icon matSuffix (click)="onSearch({ title: searchInput.value})">search</mat-icon>
+            <input #searchInput matInput (keyup.enter)="onSearch({ title: searchInput.value})">
         </mat-form-field>
     </div>
-    <div class="list__item add-note" (click)="addNote()">
+    <div class="list__item add-note" (click)="onAddNote()">
         <mat-icon>add</mat-icon>
     </div>
-    <ng-content *ngIf="notes$ | async as notes; else loadNotesTemplate">
+    <ng-content *ngIf="!isLoading; else loadNotesTemplate">
         <div class="list__item" *ngFor="let note of notes">
             <app-note-item [note]="note" (select)="onSelectNote($event)" (delete)="onDeleteNote($event)"></app-note-item>
         </div>

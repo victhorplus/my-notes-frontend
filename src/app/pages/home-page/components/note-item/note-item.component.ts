@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Notes } from '../../../../classes';
+import { Note } from '../../../../classes';
 
 @Component({
   selector: 'app-note-item',
@@ -11,9 +11,9 @@ import { Notes } from '../../../../classes';
   styleUrl: './note-item.component.scss'
 })
 export class NoteItemComponent {
-  @Input({ required: true }) note: Notes;
-  @Output() select: EventEmitter<Notes>;
-  @Output() delete: EventEmitter<Notes>;
+  @Input({ required: true }) note: Note;
+  @Output() select: EventEmitter<Note>;
+  @Output() delete: EventEmitter<Note>;
 
   constructor(){
     this.select = new EventEmitter();

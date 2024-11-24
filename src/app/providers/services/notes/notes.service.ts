@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Notes } from '../../../classes/notes.model';
-import { INotesParams } from '../../../classes';
+import { Note } from '../../../classes/note.model';
+import { INoteParams } from '../../../classes';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,10 @@ export class NotesService {
 
   constructor(private httpService: HttpClient) { }
 
-  getNotes(params?: INotesParams): Observable<Notes[]> {
+  getNotes(params?: INoteParams): Observable<Note[]> {
     const httpParams: HttpParams = new HttpParams({fromObject: params as any});
 
-    return this.httpService.get<{ data: Notes[] }>(
+    return this.httpService.get<{ data: Note[] }>(
       this.baseUrl, { params: httpParams }
     ).pipe(
       map((response) => response.data)
