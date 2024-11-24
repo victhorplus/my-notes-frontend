@@ -1,9 +1,7 @@
-<div (click)="onSelect()" class="note-body">
-  <div class="note">
-    <span class="note__title">{{ note.title }}</span>
-    <button (click)="onDelete($event)" class="note__close-button" mat-icon-button aria-label="Deletar anotação">
-      <mat-icon>close</mat-icon>
-    </button>
-    <div class="note__preview-text">{{ note.content }}</div>
-  </div>
+<div (click)="onSelect()" class="note">
+  <span class="note__title">{{ note.title }}</span>
+  <button (click)="onDelete($event)" class="note__close-button" mat-icon-button aria-label="Deletar anotação">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="note__preview-text">{{ note.content }}</div>
 </div>

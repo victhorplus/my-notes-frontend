@@ -1,15 +1,19 @@
-<section class="note-list">
-    <app-note-list-container
-        [notes]="notes$ | async"
-        [isLoading]="isLoading"
-        (search)="getData($event)"
-        (select)="onSelectNote($event)"
-        (add)="onAddNote()"
-        (delete)="onDeleteNote($event)"
-    ></app-note-list-container>
-</section>
-
-<section class="note">
-    <app-note-container></app-note-container>
-</section>
+<div class="grid">
+    <header>
+        <h2>My Notes</h2>
+    </header>
+    <aside class="note-list">
+        <app-note-list-container
+            [notes]="notes$ | async"
+            [isLoading]="isLoading"
+            (search)="getData($event)"
+            (select)="onSelectNote($event)"
+            (add)="onAddNote()"
+            (delete)="onDeleteNote($event)"
+        ></app-note-list-container>
+    </aside>
+    <main class="note">
+        <app-note-container></app-note-container>
+    </main>
+</div>
 <!-- <app-acces-token-timer></app-acces-token-timer> -->

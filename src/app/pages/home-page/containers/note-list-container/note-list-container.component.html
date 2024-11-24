@@ -1,21 +1,21 @@
-<div class="list">
-    <div class="list__search-field">
+<ul class="list">
+    <li class="list__search-field">
         <mat-form-field appearance="outline">
             <mat-label>Buscar anotação</mat-label>
             <mat-icon matSuffix (click)="onSearch({ title: searchInput.value})">search</mat-icon>
             <input #searchInput matInput (keyup.enter)="onSearch({ title: searchInput.value})">
         </mat-form-field>
-    </div>
-    <div class="list__item add-note" (click)="onAddNote()">
+    </li>
+    <li class="list__item add-note" (click)="onAddNote()">
         <mat-icon>add</mat-icon>
-    </div>
+    </li>
     <ng-content *ngIf="!isLoading; else loadNotesTemplate">
-        <div class="list__item" *ngFor="let note of notes">
+        <li class="list__item" *ngFor="let note of notes">
             <app-note-item [note]="note" (select)="onSelectNote($event)" (delete)="onDeleteNote($event)"></app-note-item>
-        </div>
+        </li>
     </ng-content>
     
     <ng-template #loadNotesTemplate>
         <mat-spinner></mat-spinner>
     </ng-template>
-</div>
+</ul>
