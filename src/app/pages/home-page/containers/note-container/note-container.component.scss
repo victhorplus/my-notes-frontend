@@ -1,0 +1,7 @@
+.note {
+    width: calc(100% - var(--note-border) - 20px);
+    height: 100%;
+    border: var(--note-border);
+    border-radius: var(--note-border-radius);
+    margin: 0px 10px;
+}

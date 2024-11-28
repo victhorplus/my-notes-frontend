@@ -5,5 +5,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
     --header-height: 90px;
-    --content-height: calc(94vh - var(--header-height));
+    --content-height: calc(95vh - var(--header-height));
+    --note-border: 2px solid rgba(204, 204, 204, 0.8);
+    --note-list-border: 2px solid rgba(204, 204, 204, 0.8);
+    --note-border-radius: 5px;
 }
