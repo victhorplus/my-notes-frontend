@@ -2,4 +2,8 @@ header {
     display: flex;
     align-items: center;
     height: var(--header-height);
+
+    .title {
+        margin: 0px;
+    }
 }

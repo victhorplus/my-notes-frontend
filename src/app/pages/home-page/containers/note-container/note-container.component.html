@@ -1,4 +1,8 @@
 <div class="note">
-    <section>TItle</section>
-    <section>Content</section>
+    <section class="note--title">
+        <input type="textarea" [value]="note?.title" placeholder="Título da anotação">
+    </section>
+    <section class="note--content">
+        <textarea [value]="note?.content" placeholder="Conteúdo da anotação"></textarea>
+    </section>
 </div>

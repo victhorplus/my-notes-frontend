@@ -14,6 +14,7 @@ import { finalize, Observable } from 'rxjs';
 })
 export class HomePageComponent {
   notes$: Observable<Note[]>;
+  selectedNote: Note;
   isLoading: boolean;
   
   constructor(private notesService: NotesService){
@@ -28,7 +29,7 @@ export class HomePageComponent {
   }
 
   onSelectNote(note: Note): void {
-    console.log("Selecionar anotação:", note);
+    this.selectedNote = note;
   }
 
   onAddNote(): void {

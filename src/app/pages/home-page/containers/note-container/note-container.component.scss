@@ -1,7 +1,31 @@
 .note {
-    width: calc(100% - var(--note-border) - 20px);
     height: 100%;
     border: var(--note-border);
     border-radius: var(--note-border-radius);
     margin: 0px 10px;
+
+    section { padding: 15px 20px 0px 20px; }
+
+    &--title>input {
+        width: 100%;
+        height: var(--note-title-height);
+        padding: 0;
+        font-size: 30px;
+        border: 0px;
+        outline: none;
+    }
+
+    &--content {
+        height: calc(93% - var(--note-title-height));
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            font-size: 20px;
+            border: 0px;
+            outline: none;
+            resize: none;
+        }
+    }
 }
