@@ -1,8 +1,5 @@
-<div class="grid">
-    <header>
-        <h2>My Notes</h2>
-    </header>
-    <aside class="note-list">
+<div class="content">
+    <aside>
         <app-note-list-container
             [notes]="notes$ | async"
             [isLoading]="isLoading"
@@ -12,7 +9,8 @@
             (delete)="onDeleteNote($event)"
         ></app-note-list-container>
     </aside>
-    <main class="note">
+    
+    <main>
         <app-note-container></app-note-container>
     </main>
 </div>

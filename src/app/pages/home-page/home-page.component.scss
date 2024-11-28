@@ -1,28 +1,4 @@
-*{
-    --header-height: calc(90px - var(--gap-size));
-    --main-height: calc(95% - var(--header-height) - var(--gap-size));
-    --gap-size: 15px;
-}
-
-.grid {
-    display: grid;
-    width: calc(100vw - 10px);
-    height: calc(100vh - 10px);
-    padding: 10px 0px 0px 10px;
-    gap: var(--gap-size);
-    grid-template:
-        "header header" var(--header-height)
-        "aside main" var(--main-height)
-        / auto 1fr;
-    header { grid-area: header }
-    aside { grid-area: aside; width: fit-content; }
-    main { grid-area: main }
-}
-
-section.note-list {
-    width: fit-content;
-    height: fit-content;
-    max-height: 95vh;
-    overflow-y: auto ;
-    scrollbar-width: thin;
+.content {
+    display: flex;
+    height: var(--content-height);
 }
