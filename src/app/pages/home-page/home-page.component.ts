@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoteContainerComponent, NoteListContainerComponent } from './containers';
 import { NotesService } from '../../providers/services';
 import { INoteParams, Note } from '../../classes';
-import { finalize, Observable } from 'rxjs';
+import { finalize, Observable, Subject, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteNoteComponent } from './components';
 
 @Component({
   selector: 'app-home-page',
@@ -12,14 +14,16 @@ import { finalize, Observable } from 'rxjs';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnDestroy {
   notes$: Observable<Note[]>;
   selectedNote: Note;
   getNotesLoading: boolean;
   noteLoading: boolean;
+  onDestroy$: Subject<void>;
   
-  constructor(private notesService: NotesService){
+  constructor(private notesService: NotesService, private dialogServie: MatDialog){
     this.getData();
+    this.onDestroy$ = new Subject();
   }
 
   getData(params?: INoteParams): void {
@@ -38,7 +42,18 @@ export class HomePageComponent {
   }
   
   onDeleteNote(note: Note): void {
-    console.log("Deletar anotação:", note);
+    const dialogRef = this.dialogServie.open(DeleteNoteComponent, { 
+      width: '350px', 
+      data: { note } 
+    });
+
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe(value => {
+        if(value.delete) {
+          this.getData();
+        }
+      });
   }
 
   onSave(note: Note){
@@ -47,16 +62,27 @@ export class HomePageComponent {
     this.noteLoading = true;
     if(note.id){
       this.notesService.updateNote(note)
-        .pipe(finalize(() => this.noteLoading = false))
+        .pipe(
+          finalize(() => this.noteLoading = false),
+          takeUntil(this.onDestroy$)
+        )
         .subscribe( note => this.selectedNote = note );
       return;
     }
 
     this.notesService.createNote(note)
-      .pipe(finalize(() => this.noteLoading = false))
+      .pipe(
+        finalize(() => this.noteLoading = false),
+        takeUntil(this.onDestroy$)
+      )
       .subscribe(note => {
         this.selectedNote = note;
         this.getData();
       });
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

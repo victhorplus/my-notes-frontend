@@ -29,4 +29,8 @@ export class NotesService {
   updateNote(note: Note): Observable<Note> {
     return this.httpService.put<Note>(`${this.baseUrl}/${note.id}`, note);
   }
+
+  deleteNote(note: Note): Observable<Note> {
+    return this.httpService.delete<Note>(`${this.baseUrl}/${note.id}`);
+  }
 }

@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Deletar anotação</h1>
+<mat-dialog-content>
+    Deseja deletar a anotação?
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button (click)="onCancel()" mat-button>Cancelar</button>
+    <button (click)="onDelete()" [disabled]="isLoading" mat-button cdkFocusInitial>
+        <ng-container *ngIf="!isLoading; else loadingButtonTemplate"> Deletar </ng-container>
+        <ng-template #loadingButtonTemplate> <mat-spinner diameter="20"></mat-spinner></ng-template>
+    </button>
+</mat-dialog-actions>
