@@ -2,7 +2,7 @@
     <aside>
         <app-note-list-container
             [notes]="notes$ | async"
-            [isLoading]="isLoading"
+            [isLoading]="getNotesLoading"
             (search)="getData($event)"
             (select)="onSelectNote($event)"
             (add)="onAddNote()"
@@ -11,7 +11,7 @@
     </aside>
     
     <main>
-        <app-note-container [note]="selectedNote"></app-note-container>
+        <app-note-container [note]="selectedNote" [isLoading]="noteLoading" (save)="onSave($event)"></app-note-container>
     </main>
 </div>
 <!-- <app-acces-token-timer></app-acces-token-timer> -->

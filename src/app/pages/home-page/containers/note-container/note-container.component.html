@@ -1,8 +1,11 @@
-<div class="note">
+<form [formGroup]="noteForm" class="note">
     <section class="note--title">
-        <input type="textarea" [value]="note?.title" placeholder="Título da anotação">
+        <input formControlName="title" placeholder="Título da anotação">
+        <ng-container *ngIf="isLoading">
+            <mat-spinner diameter="20"></mat-spinner>
+        </ng-container>
     </section>
     <section class="note--content">
-        <textarea [value]="note?.content" placeholder="Conteúdo da anotação"></textarea>
+        <textarea formControlName="content" placeholder="Conteúdo da anotação"></textarea>
     </section>
-</div>
+</form>

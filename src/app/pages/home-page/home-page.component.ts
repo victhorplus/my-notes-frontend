@@ -15,16 +15,17 @@ import { finalize, Observable } from 'rxjs';
 export class HomePageComponent {
   notes$: Observable<Note[]>;
   selectedNote: Note;
-  isLoading: boolean;
+  getNotesLoading: boolean;
+  noteLoading: boolean;
   
   constructor(private notesService: NotesService){
     this.getData();
   }
 
   getData(params?: INoteParams): void {
-    this.isLoading = true;
+    this.getNotesLoading = true;
     this.notes$ = this.notesService.getNotes(params).pipe(
-      finalize(() => this.isLoading = false)
+      finalize(() => this.getNotesLoading = false)
     );
   }
 
@@ -33,10 +34,29 @@ export class HomePageComponent {
   }
 
   onAddNote(): void {
-    console.log("Adicionar anotação");
+    this.selectedNote = null;
   }
   
   onDeleteNote(note: Note): void {
     console.log("Deletar anotação:", note);
+  }
+
+  onSave(note: Note){
+    if(!note.title && !note.content){ return; }
+
+    this.noteLoading = true;
+    if(note.id){
+      this.notesService.updateNote(note)
+        .pipe(finalize(() => this.noteLoading = false))
+        .subscribe( note => this.selectedNote = note );
+      return;
+    }
+
+    this.notesService.createNote(note)
+      .pipe(finalize(() => this.noteLoading = false))
+      .subscribe(note => {
+        this.selectedNote = note;
+        this.getData();
+      });
   }
 }

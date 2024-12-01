@@ -21,4 +21,12 @@ export class NotesService {
       map((response) => response.data)
     );
   }
+
+  createNote(note: Note): Observable<Note> {
+    return this.httpService.post<Note>(`${this.baseUrl}`, note);
+  }
+
+  updateNote(note: Note): Observable<Note> {
+    return this.httpService.put<Note>(`${this.baseUrl}/${note.id}`, note);
+  }
 }

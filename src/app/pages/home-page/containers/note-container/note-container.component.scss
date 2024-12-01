@@ -6,13 +6,18 @@
 
     section { padding: 15px 20px 0px 20px; }
 
-    &--title>input {
-        width: 100%;
-        height: var(--note-title-height);
-        padding: 0;
-        font-size: 30px;
-        border: 0px;
-        outline: none;
+    &--title {
+        display: flex;
+        align-items: center;
+        
+        input {
+            width: 100%;
+            height: var(--note-title-height);
+            padding: 0;
+            font-size: 30px;
+            border: 0px;
+            outline: none;
+        }
     }
 
     &--content {
