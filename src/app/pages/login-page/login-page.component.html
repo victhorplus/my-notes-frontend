@@ -8,16 +8,12 @@
             <mat-label>Senha: </mat-label>
             <input formControlName="password" matInput type="password">
         </mat-form-field>
-        <ng-container *ngIf="!isLoading; else loadingButtonTemplate">
-            <button (click)="authenticate()" [disabled]="form.invalid" class="form__login-button" mat-fab>
-                <mat-icon>login</mat-icon>
+        <button (click)="authenticate()" [disabled]="form.invalid || isLoading" class="form__login-button" mat-fab>
+            <ng-container *ngIf="!isLoading; else loadingButtonTemplate">
                 Login
-            </button>
-        </ng-container>
-        <ng-template #loadingButtonTemplate>
-            <button disabled="true" class="form__login-button" mat-fab>
-                <mat-spinner diameter="20"></mat-spinner>
-            </button>
-        </ng-template>
+                <mat-icon>login</mat-icon>
+            </ng-container>
+            <ng-template #loadingButtonTemplate> <mat-spinner diameter="20"></mat-spinner> </ng-template>
+        </button>
     </form>
 </main>
