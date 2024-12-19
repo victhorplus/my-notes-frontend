@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Note } from '../../../classes/note.model';
 import { INoteParams } from '../../../classes';
+import { enviroment } from '../../../../enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
-  baseUrl = 'http://localhost:3000/notes';
+  baseUrl = `${enviroment.apiUrl}/notes`;
 
   constructor(private httpService: HttpClient) { }
 

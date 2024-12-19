@@ -1,3 +1,3 @@
 export const enviroment = {
-    apiUrl: 'https://localhost:3000'
+    apiUrl: 'https://my-notes-api-kcza.onrender.com'
 }

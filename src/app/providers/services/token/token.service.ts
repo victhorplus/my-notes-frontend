@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { enviroment } from '../../../../enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  baseUrl = 'http://localhost:3000/authenticate/refresh-token';
+  baseUrl = `${enviroment.apiUrl}/authenticate/refresh-token`;
 
   constructor(private httpService: HttpClient) { }
 
