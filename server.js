@@ -9,6 +9,8 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
 });
 
-app.listen(8080, () => {
-    console.log("Frontend server listen 8080")
-})
+const port = process.env.PORT || 3000;
+
+app.listen(port, '0.0.0.0', () => {
+    console.log("Servidor rodando na porta: ", port)
+});
