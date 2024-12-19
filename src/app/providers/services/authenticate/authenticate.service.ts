@@ -1,14 +1,15 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticateModel } from '../../../classes';
+import { enviroment } from '../../../../enviroments/enviroment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticateService {
-  url = "http://localhost:3000";
-  // url = "https://my-notes-api-kcza.onrender.com";
+  url = enviroment.apiUrl;
   constructor(private http: HttpClient) { }
 
   get(): Observable<any>{
