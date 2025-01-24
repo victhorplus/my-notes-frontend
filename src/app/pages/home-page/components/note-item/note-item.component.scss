@@ -6,6 +6,7 @@
     height: 80px;
     cursor: pointer;
     padding: 5px 10px;
+    user-select: none;
 
     &__title {
         display: flex;
@@ -24,6 +25,9 @@
     &:hover {
         background-color: #f3f3f3;
         transition: 0.2s;
+    }
+    &:active {
+        color: rgba(0,0,0, 0.6)
     }
   }
   
