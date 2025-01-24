@@ -1,3 +1,18 @@
 <header>
-    <h2 class="title">My Notes</h2>
+    <h2 class="title">
+        <a [routerLink]="''">My Notes</a>
+    </h2>
+    <button *ngIf="isLogged" class="profile-image" [matMenuTriggerFor]="menu">
+        <img [src]="imageSource">
+    </button>
+    <mat-menu class="profile-image-menu" #menu="matMenu">
+        <a [routerLink]="'teste'" mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            Configurações
+        </a>
+        <button (click)="logout()" mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            Logout
+        </button>
+    </mat-menu>
 </header>
