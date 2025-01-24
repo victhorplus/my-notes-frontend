@@ -13,13 +13,14 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
-    --header-height: 90px;
-    --content-height: calc(95vh - var(--header-height));
-    --note-border: 2px solid rgba(204, 204, 204, 0.8);
-    --note-list-border: 2px solid rgba(204, 204, 204, 0.8);
-    --note-border-radius: 5px;
-    --note-title-height: 50px;
-    --header-border: 2px solid rgba(204, 204, 204, 0.8);
-    --header-border-radius: 5px;
-    --profile-image-border: 3px solid rgba(204, 204, 204, 0.8);
+  --aside-max-width: 320px;
+  --header-height: 90px;
+  --content-height: calc(95vh - var(--header-height));
+  --note-border: 2px solid rgba(204, 204, 204, 0.8);
+  --note-list-border: 2px solid rgba(204, 204, 204, 0.8);
+  --note-border-radius: 5px;
+  --note-title-height: 50px;
+  --header-border: 2px solid rgba(204, 204, 204, 0.8);
+  --header-border-radius: 5px;
+  --profile-image-border: 3px solid rgba(204, 204, 204, 0.8);
 }
