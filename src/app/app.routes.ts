@@ -13,6 +13,12 @@ export const routes: Routes = [
         canActivate: [loginGuard]
     },
     {
+        path: 'account-manager',
+        loadComponent: () => import('./pages/account-manager-page/account-manager-page.component').then(m => m.AccountManagerPageComponent),
+        loadChildren: () => import('./pages/account-manager-page/account-manager-page.routes').then(m => m.AcconteManagerRoutes),
+        canActivate: [authenticateGuard]
+    },
+    {
         path: '**',
         loadComponent: () => import('./pages/page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent),
         canActivate: [authenticateGuard]
