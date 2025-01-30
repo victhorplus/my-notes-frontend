@@ -14,12 +14,12 @@ export const AccountRoutes: Routes = [
     },
     {
         path: 'change-password',
-        loadComponent: () => import('../account-info-page/account-info-page.component').then(m => m.AccountInfoPageComponent),
+        loadComponent: () => import('../account-change-password-page/account-change-password-page.component').then(m => m.AccountChangePasswordPageComponent),
         canActivate: [authenticateGuard]
     },
     {
         path: 'delete-account',
-        loadComponent: () => import('../account-info-page/account-info-page.component').then(m => m.AccountInfoPageComponent),
+        loadComponent: () => import('../account-delete-page/account-delete-page.component').then(m => m.AccountDeletePageComponent),
         canActivate: [authenticateGuard]
     },
     {
