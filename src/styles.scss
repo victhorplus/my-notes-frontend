@@ -13,7 +13,6 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
-  --aside-max-width: 320px;
   --header-height: 90px;
   --content-height: calc(95vh - var(--header-height));
   --note-border: 2px solid rgba(204, 204, 204, 0.8);
