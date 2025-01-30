@@ -17,7 +17,9 @@ export class HeaderComponent {
   isLogged: boolean;
 
   constructor(private router: Router, private authenticateService: AuthenticateService) {
-    this.isLogged = this.authenticateService.isLogged();
+    this.router.events.subscribe(() => {
+      this.isLogged = this.authenticateService.isLogged();
+    })
   }
   
   logout(): void {
