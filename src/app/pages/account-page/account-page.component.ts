@@ -3,12 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { SideMenuComponent } from './components';
 
 @Component({
-  selector: 'app-account-manager-page',
+  selector: 'app-account-page',
   standalone: true,
   imports: [RouterOutlet, SideMenuComponent],
-  templateUrl: './account-manager-page.component.html',
-  styleUrl: './account-manager-page.component.scss'
+  templateUrl: './account-page.component.html',
+  styleUrl: './account-page.component.scss'
 })
-export class AccountManagerPageComponent {
+export class AccountPageComponent {
 
 }
