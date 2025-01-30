@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { authenticateGuard } from '../../providers/guards';
 
-export const AcconteManagerRoutes: Routes = [
+export const AccountRoutes: Routes = [
     {
         path: 'info',
         loadComponent: () => import('../account-info-page/account-info-page.component').then(m => m.AccountInfoPageComponent),
@@ -9,7 +9,7 @@ export const AcconteManagerRoutes: Routes = [
     },
     {
         path: 'change-email',
-        loadComponent: () => import('../account-change-email-page').then(m => m.),
+        loadComponent: () => import('../account-change-email-page/account-change-email-page.component').then(m => m.AccountChangeEmailPageComponent),
         canActivate: [authenticateGuard]
     },
     {

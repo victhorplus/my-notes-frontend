@@ -1,5 +1,5 @@
 <div class="menu">
     <div *ngFor="let item of menuList" class="menu--item">
-        <a mat-button extended [routerLink]="item.route">{{ item.label }}</a>
+        <a mat-button extended [routerLink]="item.route" routerLinkActive="selected">{{ item.label }}</a>
     </div>
 </div>
