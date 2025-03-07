@@ -1,0 +1,16 @@
+<div>
+    id: <input #idTemplate type="text">
+    <button (click)="buscaTask(+idTemplate.value)">Search</button>
+</div>
+<div>
+    title: <input #title type="text" [value]="currentTask.title">
+</div>
+<div>
+    description: <input #description type="text" [value]="currentTask.description">
+</div>
+<div>
+    <button (click)="updateTask(+idTemplate.value, title.value, description.value )">Editar</button>
+</div>
+<div>
+    <button (click)="addTask()">Adicionar</button>
+</div>
