@@ -1,12 +1,13 @@
 import { ApplicationConfig, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideStore } from '@ngrx/store';
+import { provideStore, provideState } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { refreshTokenInterceptor } from './providers/interceptors';
+import { LoginReducer } from './store/login/login.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,9 +18,9 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([
         refreshTokenInterceptor,
       ]),
-
     ),
     provideStore(),
+    provideState('login', LoginReducer),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

@@ -8,7 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthenticateService, TokenService } from '../../providers/services';
 import { Router } from '@angular/router';
-import { finalize, Subject, takeUntil } from 'rxjs';
+import { finalize, Observable, Subject, takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { authenticateSelector } from '../../store/login/login.selectors';
+import { AuthenticateModel } from '../../classes';
+import { LoginActions } from '../../store/login/login.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -21,23 +25,28 @@ export class LoginPageComponent implements OnDestroy {
   form: FormGroup;
   isLoading: boolean;
   onDestroy$: Subject<void>;
+  authenticateState$: Observable<AuthenticateModel> = this.store.select(authenticateSelector);
 
   constructor(
     private formBuilder: FormBuilder,
     private authenticateService: AuthenticateService,
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ){
     this.onDestroy$ = new Subject();
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+    this.authenticateState$.subscribe(state => {
+      console.log("authenticate state: ", state)
+    })
   }
 
   authenticate(){
     const { email, password } = this.form.value;
-
+    
     this.isLoading = true;
     this.authenticateService.authenticate(email, password)
     .pipe(
@@ -49,6 +58,7 @@ export class LoginPageComponent implements OnDestroy {
 
       localStorage.setItem('user', JSON.stringify(user));
       this.tokenService.storeAccessToken(accessToken);
+      this.store.dispatch(LoginActions.storeAuth(result));
       this.router.navigate(['']);
     });
   }
